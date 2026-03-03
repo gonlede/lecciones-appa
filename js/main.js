@@ -208,7 +208,7 @@ function renderManiobrasList() {
         const label = document.createElement("label");
         label.htmlFor = `chk_${i}`;
         label.classList.add('form-check-label');
-        label.textContent = m;
+        label.textContent = `${i + 1}. ${m}`;
 
         formCheckDiv.appendChild(cb);
         formCheckDiv.appendChild(label);
