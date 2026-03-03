@@ -149,7 +149,7 @@ function renderSelectores() {
     const selectedAlumno = alumnoSelect.value;
     const currentAlumnoData = data.registros[selectedAlumno];
 
-    leccionSelect.innerHTML = '<option value="" selected>Seleccionar Lección...</option>';
+    leccionSelect.innerHTML = '<option value="" selected>Lección</option>';
     for (let i = 1; i <= 50; i++) {
         const o = document.createElement("option");
         o.value = i;
