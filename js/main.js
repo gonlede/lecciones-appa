@@ -149,7 +149,7 @@ function renderSelectores() {
     const selectedAlumno = alumnoSelect.value;
     const currentAlumnoData = data.registros[selectedAlumno];
 
-    leccionSelect.innerHTML = '<option value="" selected>Lección</option>';
+    leccionSelect.innerHTML = "";
     for (let i = 1; i <= 50; i++) {
         const o = document.createElement("option");
         o.value = i;
@@ -167,17 +167,14 @@ function renderSelectores() {
     });
 
     if (currentAlumnoData) {
+        const hasExistingData = Object.keys(currentAlumnoData.sesiones || {}).length > 0;
+        leccionSelect.value = hasExistingData ? (currentAlumnoData.ultimaLeccion || 1) : 1;
+
         const lastAeronave = currentAlumnoData.ultimaAeronave;
-        const aeronaveOpt = lastAeronave ? aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`) : null;
-        if (aeronaveOpt) {
-            aeronaveOpt.selected = true;
-            const hasExistingData = Object.keys(currentAlumnoData.sesiones || {}).length > 0;
-            leccionSelect.value = hasExistingData ? (currentAlumnoData.ultimaLeccion || 1) : 1;
-        } else {
-            leccionSelect.value = "";
+        if (lastAeronave) {
+            const opt = aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`);
+            if (opt) opt.selected = true;
         }
-    } else {
-        leccionSelect.value = "";
     }
 
     actualizarAlertaFaltantes();
@@ -306,10 +303,6 @@ function onHeaderChange(event) {
 
     data.ultimoAlumno = currentAlumno || null;
 
-    if (!currentAlumno || !currentAeronave) {
-        leccionSelect.value = "";
-    }
-
     const isComplete = currentAlumno && currentLeccion && currentAeronave;
 
     fechaInput.disabled = !isComplete;
@@ -328,15 +321,18 @@ function onHeaderChange(event) {
             const lastAeroOption = aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`);
             if (lastAeroOption) {
                 aeronaveSelect.value = lastAeronave.nombre;
-                const hasExistingData = Object.keys(currentAlumnoData.sesiones).length > 0;
-                leccionSelect.value = hasExistingData ? (currentAlumnoData.ultimaLeccion || 1) : 1;
             } else {
                 aeronaveSelect.value = "";
-                leccionSelect.value = "";
             }
         } else {
             aeronaveSelect.value = "";
-            leccionSelect.value = "";
+        }
+
+        const hasExistingData = Object.keys(currentAlumnoData.sesiones).length > 0;
+        if (!hasExistingData) {
+            leccionSelect.value = 1;
+        } else {
+            leccionSelect.value = currentAlumnoData.ultimaLeccion || 1;
         }
     }
 
