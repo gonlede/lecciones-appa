@@ -307,6 +307,8 @@ function onHeaderChange(event) {
     const currentLeccion = leccionSelect.value;
     const currentAeronave = aeronaveSelect.value;
 
+    data.ultimoAlumno = currentAlumno || null;
+
     const isComplete = currentAlumno && currentLeccion && currentAeronave;
 
     fechaInput.disabled = !isComplete;
