@@ -166,6 +166,17 @@ function renderSelectores() {
         aeronaveSelect.appendChild(o);
     });
 
+    if (currentAlumnoData) {
+        const hasExistingData = Object.keys(currentAlumnoData.sesiones || {}).length > 0;
+        leccionSelect.value = hasExistingData ? (currentAlumnoData.ultimaLeccion || 1) : 1;
+
+        const lastAeronave = currentAlumnoData.ultimaAeronave;
+        if (lastAeronave) {
+            const opt = aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`);
+            if (opt) opt.selected = true;
+        }
+    }
+
     actualizarAlertaFaltantes();
 }
 
@@ -305,7 +316,17 @@ function onHeaderChange(event) {
     const currentAlumnoData = data.registros[currentAlumno];
 
     if (event && event.target.id === 'alumnoSelect' && currentAlumnoData) {
-        aeronaveSelect.value = "";
+        const lastAeronave = currentAlumnoData.ultimaAeronave;
+        if (lastAeronave) {
+            const lastAeroOption = aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`);
+            if (lastAeroOption) {
+                aeronaveSelect.value = lastAeronave.nombre;
+            } else {
+                aeronaveSelect.value = "";
+            }
+        } else {
+            aeronaveSelect.value = "";
+        }
 
         const hasExistingData = Object.keys(currentAlumnoData.sesiones).length > 0;
         if (!hasExistingData) {
