@@ -176,12 +176,6 @@ function renderSelectores() {
         if (lastAeroOption) {
             lastAeroOption.selected = true;
         }
-    } else if (data.aeronaves.length === 1) {
-        const defaultAero = data.aeronaves[0];
-        const defaultOption = aeronaveSelect.querySelector(`option[data-matricula="${defaultAero.matricula}"]`);
-        if (defaultOption) {
-            defaultOption.selected = true;
-        }
     }
     actualizarAlertaFaltantes();
 }
@@ -330,8 +324,6 @@ function onHeaderChange(event) {
             } else {
                 aeronaveSelect.value = "";
             }
-        } else if (data.aeronaves.length === 1) {
-            aeronaveSelect.value = data.aeronaves[0].nombre;
         } else {
             aeronaveSelect.value = "";
         }
@@ -732,7 +724,6 @@ function init() {
                 ultimaFecha: fechaHoy(),
                 ultimaAeronave: null
             };
-            data.ultimoAlumno = val;
             renderSelectores();
             onHeaderChange();
             renderListaAlumnos();
