@@ -23,7 +23,7 @@ let defaultManiobras = [
     "Briefing Prevuelo", "Inspección Prevuelo", "Puesta en marcha y calentamiento", "Procedimiento radioeléctrico", "Rodaje",
     "Verificación previa al despegue", "Despegue normal/campo corto/campo blando", "Uso de los flaps", "Reconocimiento visual de la zona",
     "Ascenso mejor régimen VY", "Ascenso mejor ángulo VX", "Salida del circuito de tránsito", "Viraje en ascenso", "Vuelo recto y nivelado",
-    "A- Virajes suaves", "B- Virajes Medios", "C- Virajes escarpados", "\"S\" a través de caminos", "Giros alrededor de un punto", "\"8\" alrededor de pilones",
+    "A- Virajes suaves", "B- Virajes Medios", "C- Virajes escarpados", "\u201CS\u201D a través de caminos", "Giros alrededor de un punto", "\u201C8\u201D alrededor de pilones",
     "Espirales descendentes de 720°", "Ejercicios de coordinación nivelados en ascensos y descensos", "Cambios de velocidades en línea de vuelo", "Vuelo lento",
     "Aproximación a la perdida recta con potencia", "Aproximación a la perdida recta sin potencia", "Aproximación a la perdida en viraje con potencia",
     "Aproximación a la perdida en viraje sin potencia", "Perdida recta con potencia", "Perdida recta sin potencia", "Perdida recta en viraje con potencia",
@@ -690,6 +690,7 @@ function init() {
     maniobrasList = document.getElementById("maniobrasList");
     listaAlumnos = document.getElementById("listaAlumnos");
     listaManiobras = document.getElementById("listaManiobras");
+    listaAeronaves = document.getElementById("listaAeronaves");
 
     alumnoSelect.addEventListener("change", onHeaderChange);
     leccionSelect.addEventListener("change", onHeaderChange);
