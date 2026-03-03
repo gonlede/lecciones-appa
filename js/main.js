@@ -305,6 +305,7 @@ function onHeaderChange(event) {
 
     const isComplete = currentAlumno && currentLeccion && currentAeronave;
 
+    leccionSelect.disabled = !currentAlumno || !currentAeronave;
     fechaInput.disabled = !isComplete;
     dcInput.disabled = !isComplete;
     vsInput.disabled = !isComplete;
