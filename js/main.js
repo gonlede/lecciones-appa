@@ -166,13 +166,6 @@ function renderSelectores() {
         aeronaveSelect.appendChild(o);
     });
 
-    const lastAeronave = currentAlumnoData?.ultimaAeronave;
-    if (lastAeronave) {
-        const lastAeroOption = aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`);
-        if (lastAeroOption) {
-            lastAeroOption.selected = true;
-        }
-    }
     actualizarAlertaFaltantes();
 }
 
@@ -312,17 +305,7 @@ function onHeaderChange(event) {
     const currentAlumnoData = data.registros[currentAlumno];
 
     if (event && event.target.id === 'alumnoSelect' && currentAlumnoData) {
-        const lastAeronave = currentAlumnoData.ultimaAeronave;
-        if (lastAeronave) {
-            const lastAeroOption = aeronaveSelect.querySelector(`option[data-matricula="${lastAeronave.matricula}"]`);
-            if (lastAeroOption) {
-                aeronaveSelect.value = lastAeronave.nombre;
-            } else {
-                aeronaveSelect.value = "";
-            }
-        } else {
-            aeronaveSelect.value = "";
-        }
+        aeronaveSelect.value = "";
 
         const hasExistingData = Object.keys(currentAlumnoData.sesiones).length > 0;
         if (!hasExistingData) {
