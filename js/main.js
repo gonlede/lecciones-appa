@@ -110,10 +110,6 @@ function cargarDatosIniciales() {
         }
     });
 
-    if (!data.ultimoAlumno) {
-        data.ultimoAlumno = data.alumnos.length > 0 ? data.alumnos[0] : null;
-    }
-
     renderSelectores();
     onHeaderChange();
     renderListaAlumnos();
@@ -515,9 +511,9 @@ function renderListaAlumnos() {
         del.addEventListener("click", () => {
             if (confirm(`Se eliminará el alumno "${a}" y todos sus registros`)) {
                 data.alumnos.splice(i, 1);
-                delete data.registros[a];
-                data.ultimoAlumno = data.alumnos.length > 0 ? data.alumnos[0] : null;
-                renderSelectores();
+                        delete data.registros[a];
+                        data.ultimoAlumno = null;
+                        renderSelectores();
                 onHeaderChange();
                 renderListaAlumnos();
             }
@@ -724,6 +720,7 @@ function init() {
                 ultimaFecha: fechaHoy(),
                 ultimaAeronave: null
             };
+            data.ultimoAlumno = null;
             renderSelectores();
             onHeaderChange();
             renderListaAlumnos();
@@ -896,11 +893,6 @@ function init() {
                         observaciones: reg.observaciones || ''
                     };
                 }
-            }
-
-            const ultimoAlumno = data.alumnos.length > 0 ? data.alumnos[0] : null;
-            if (ultimoAlumno) {
-                data.ultimoAlumno = ultimoAlumno;
             }
 
             guardarDatos();
