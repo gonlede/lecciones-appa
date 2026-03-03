@@ -119,6 +119,23 @@ function cargarDatosIniciales() {
     renderListaAlumnos();
     renderListaManiobras();
     renderListaAeronaves();
+    actualizarAlertaFaltantes();
+}
+
+function actualizarAlertaFaltantes() {
+    const faltantes = [];
+    if (!data.alumnos.length) faltantes.push('al menos un alumno');
+    if (!data.aeronaves.length) faltantes.push('al menos una aeronave');
+    if (!data.maniobras.length) faltantes.push('al menos una maniobra');
+    const el = document.getElementById('alertaFaltantes');
+    const texto = document.getElementById('alertaFaltantesTexto');
+    if (!el || !texto) return;
+    if (faltantes.length) {
+        texto.textContent = 'Para habilitar la planilla, cargue ' + faltantes.join(', ') + '.';
+        el.classList.remove('d-none');
+    } else {
+        el.classList.add('d-none');
+    }
 }
 
 function renderSelectores() {
@@ -166,6 +183,7 @@ function renderSelectores() {
             defaultOption.selected = true;
         }
     }
+    actualizarAlertaFaltantes();
 }
 
 function renderManiobrasList() {
@@ -514,6 +532,7 @@ function renderListaAlumnos() {
         li.appendChild(del);
         listaAlumnos.appendChild(li);
     });
+    actualizarAlertaFaltantes();
 }
 
 function renderListaManiobras() {
@@ -593,6 +612,7 @@ function renderListaManiobras() {
             }
         }
     });
+    actualizarAlertaFaltantes();
 }
 
 function renderListaAeronaves() {
@@ -653,6 +673,7 @@ function renderListaAeronaves() {
         li.appendChild(del);
         listaAeronaves.appendChild(li);
     });
+    actualizarAlertaFaltantes();
 }
 
 // Inicialización (main.js se carga dinámicamente, DOMContentLoaded puede haber pasado ya)
