@@ -655,8 +655,8 @@ function renderListaAeronaves() {
     });
 }
 
-// Inicialización
-document.addEventListener("DOMContentLoaded", () => {
+// Inicialización (main.js se carga dinámicamente, DOMContentLoaded puede haber pasado ya)
+function init() {
     copiarLeccionBtn = document.getElementById("copiarLeccionBtn");
     dcInput = document.getElementById("dcInput");
     vsInput = document.getElementById("vsInput");
@@ -902,4 +902,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     cargarDatosIniciales();
-});
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
