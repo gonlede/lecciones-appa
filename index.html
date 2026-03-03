@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!-- Incrementar data-asset-version al cambiar css/main.css o js/main.js para forzar recarga -->
+<html lang="es" data-asset-version="1.0.1">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Planilla de Instrucción - APPA</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta property="og:image" content="https://gonlede.github.io/lecciones-appa/img/logo-787x363.png">
+    <meta property="og:title" content="Planilla de Instrucción - APPA">
+    <meta property="og:description" content="Planilla de instrucción de vuelo para instructores">
+    <meta property="og:type" content="website">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script>
+        (function(){var v=document.documentElement.getAttribute('data-asset-version')||'1';document.write('<link rel="stylesheet" href="css/main.css?v='+v+'">');})();
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand d-md-none" href="#">Planilla de Instrucción</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-seccion="planilla" href="#">Planilla</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-seccion="gestion-alumnos" href="#">Alumnos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-seccion="gestion-maniobras" href="#">Maniobras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-seccion="gestion-aeronaves" href="#">Aeronaves</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-seccion="importar-exportar" href="#">Importar/Exportar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div id="planilla" class="seccion active">
+            <div class="row g-2 mb-4">
+                <div class="col-md-6 col-12">
+                    <div class="form-floating">
+                        <select id="alumnoSelect" class="form-select" aria-label="Alumno"></select>
+                        <label for="alumnoSelect">Alumno</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <select id="aeronaveSelect" class="form-select"
+                                    aria-label="Aeronave"></select>
+                                <label for="aeronaveSelect">Aeronave</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-2 mb-4">
+                <div class="col-md-3 col-6">
+                    <div class="form-floating">
+                        <select id="leccionSelect" class="form-select" aria-label="Lección"></select>
+                        <label for="leccionSelect">Lección</label>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="form-floating">
+                        <input type="date" id="fechaInput" class="form-control" placeholder="Fecha" disabled>
+                        <label for="fechaInput">Fecha</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="dcInput" placeholder="DC" disabled>
+                                <label for="dcInput">DC</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="vsInput" placeholder="VS" disabled>
+                                <label for="vsInput">VS</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="attInput" placeholder="ATT" disabled>
+                                <label for="attInput">ATT</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card mb-3" id="maniobrasCard">
+                <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">
+                    <span class="fw-bold">Maniobras</span>
+                    <button class="btn btn-sm btn-outline-secondary d-none" id="copiarLeccionBtn"><i class="bi bi-arrow-clockwise"></i> Lección anterior</button>
+                </div>
+                <div class="maniobras-list-container" id="maniobrasList">
+                </div>
+                <div class="card-footer bg-transparent border-top">
+                    <textarea id="observacionesInput" class="form-control" rows="3" placeholder="Notas de la lección..."
+                        aria-label="Observaciones" disabled></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="gestion-alumnos" class="seccion">
+            <div class="input-group mb-3">
+                <input type="text" id="nuevoAlumno" class="form-control" placeholder="Nombre alumno">
+                <button class="btn btn-primary" type="button" id="agregarAlumno"><i class="bi bi-person-plus"></i>
+                    Agregar</button>
+            </div>
+            <ul id="listaAlumnos" class="list-group">
+            </ul>
+        </div>
+
+        <div id="gestion-maniobras" class="seccion">
+            <div class="input-group mb-3">
+                <input type="text" id="nuevaManiobra" class="form-control" placeholder="Nombre maniobra">
+                <button class="btn btn-primary" type="button" id="agregarManiobra"><i class="bi bi-plus-circle"></i>
+                    Agregar</button>
+            </div>
+            <ul id="listaManiobras" class="list-group">
+            </ul>
+        </div>
+
+        <div id="gestion-aeronaves" class="seccion">
+            <div class="input-group mb-3">
+                <input type="text" id="nuevaAeronaveNombre" class="form-control" placeholder="Aeronave">
+                <input type="text" id="nuevaAeronaveMatricula" class="form-control" placeholder="Matrícula">
+                <button class="btn btn-primary" type="button" id="agregarAeronave"><i class="bi bi-plus-circle"></i>
+                    Agregar</button>
+            </div>
+            <ul id="listaAeronaves" class="list-group">
+            </ul>
+        </div>
+
+        <div id="importar-exportar" class="seccion">
+            <h2>Importar / Exportar Datos</h2>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Exportar</h5>
+                    <p class="card-text">Exporta todos los datos de la planilla a un archivo CSV.</p>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-download"></i> Exportar
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="exportarDetallado">Detallado</a></li>
+                            <li><a class="dropdown-item" href="#" id="exportarCompacto">Compacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Importar</h5>
+                    <p class="card-text">Carga datos desde un archivo CSV.</p>
+                    <button class="btn btn-warning" id="cargarArchivoBtn"><i class="bi bi-upload"></i> Importar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (function(){var v=document.documentElement.getAttribute('data-asset-version')||'1';var s=document.createElement('script');s.src='js/main.js?v='+v;document.body.appendChild(s);})();
+    </script>
+</body>
+
+</html>

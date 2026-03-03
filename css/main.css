@@ -1,0 +1,141 @@
+.container-fluid {
+    max-width: 1200px;
+}
+
+.seccion {
+    display: none;
+}
+
+.seccion.active {
+    display: block;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item span[contenteditable="true"] {
+    flex-grow: 1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.list-group-item span[contenteditable="true"]:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item .bi {
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.edit-feedback {
+    transition: background-color 0.5s ease-in-out;
+}
+
+/* Estilo para la confirmación visual de guardado */
+.edit-feedback.saved,
+.form-control.saved {
+    background-color: #d4edda;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+}
+
+/* Estilos para el listado de checkboxes */
+.maniobras-list-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Planilla: checkboxes de maniobras (NO afecta gestión-maniobras con drag) */
+#maniobrasList .maniobras-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 0.5rem 0.75rem 0.5rem;
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#maniobrasList .maniobras-item:hover {
+    background-color: #f8f9fa;
+}
+
+#maniobrasList .maniobras-item.saved {
+    background-color: #d4edda;
+}
+
+#maniobrasList .maniobras-item .form-check {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#maniobrasList .maniobras-item .form-check-input {
+    margin: 0.2em 0.5rem 0 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+#maniobrasList .maniobras-item .form-check-label {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    cursor: pointer;
+    word-wrap: break-word;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    z-index: 10;
+    font-weight: bold;
+}
+
+.list-header-num {
+    width: 2rem;
+    text-align: right;
+    padding-right: 0.5rem;
+}
+
+.aeronave-item-content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* Sortable maniobras */
+.maniobras-drag-handle {
+    cursor: grab;
+    color: #6c757d;
+    padding: 0.25rem;
+    margin-right: 0.5rem;
+}
+.maniobras-drag-handle:active {
+    cursor: grabbing;
+}
+.sortable-ghost {
+    opacity: 0.4;
+}
+.sortable-chosen {
+    background-color: #e7f1ff;
+}
