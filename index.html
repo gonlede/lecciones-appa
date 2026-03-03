@@ -75,49 +75,46 @@
             overflow-y: auto;
         }
 
-        .maniobras-item {
+        /* Planilla: checkboxes de maniobras (NO afecta gestión-maniobras con drag) */
+        #maniobrasList .maniobras-item {
             display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
+            align-items: flex-start;
+            padding: 0.75rem 0.5rem 0.75rem 0.5rem;
             border-bottom: 1px solid #dee2e6;
             transition: background-color 0.2s ease-in-out;
         }
 
-        .maniobras-item:hover {
+        #maniobrasList .maniobras-item:hover {
             background-color: #f8f9fa;
         }
 
-        .maniobras-item.saved {
+        #maniobrasList .maniobras-item.saved {
             background-color: #d4edda;
         }
 
-        .maniobras-item .maniobra-num {
-            width: 2rem;
-            font-weight: bold;
-            text-align: right;
-            padding-right: 0.5rem;
-        }
-
-        .maniobras-item .form-check {
+        #maniobrasList .maniobras-item .form-check {
             display: flex;
-            align-items: center;
-            flex-grow: 1;
-            margin-bottom: 0;
-            padding-left: 0;
+            align-items: flex-start;
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
         }
 
-        .maniobras-item .form-check-input {
-            margin-right: 1rem;
-            margin-top: 0;
+        #maniobrasList .maniobras-item .form-check-input {
+            margin: 0.2em 0.5rem 0 0;
             flex-shrink: 0;
             cursor: pointer;
         }
 
-        .maniobras-item .form-check-label {
-            flex-grow: 1;
-            margin-bottom: 0;
-            line-height: 1.2;
+        #maniobrasList .maniobras-item .form-check-label {
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
             cursor: pointer;
+            word-wrap: break-word;
         }
 
         .list-header {
@@ -256,12 +253,9 @@
             </div>
 
             <div class="card mb-3" id="maniobrasCard">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <span class="list-header-num me-2">#</span>
-                        <span class="list-header-text fw-bold">Maniobra</span>
-                    </div>
-                    <button class="btn btn-sm btn-outline-secondary d-none" id="copiarLeccionBtn"> <i class="bi bi-arrow-clockwise"></i> Lección anterior</button>
+                <div class="card-header d-flex justify-content-between align-items-center py-2 px-2">
+                    <span class="fw-bold">Maniobra</span>
+                    <button class="btn btn-sm btn-outline-secondary d-none" id="copiarLeccionBtn"><i class="bi bi-arrow-clockwise"></i> Lección anterior</button>
                 </div>
                 <div class="maniobras-list-container" id="maniobrasList">
                 </div>
@@ -527,11 +521,6 @@
                 // Retroalimentación visual al hacer hover sobre el item
                 item.addEventListener('mouseover', () => item.style.backgroundColor = '#f8f9fa');
                 item.addEventListener('mouseout', () => item.style.backgroundColor = 'transparent');
-
-                const itemNum = document.createElement("span");
-                itemNum.classList.add('maniobra-num');
-                //itemNum.textContent = `${i + 1}`;
-                item.appendChild(itemNum);
 
                 const formCheckDiv = document.createElement("div");
                 formCheckDiv.classList.add('form-check');
