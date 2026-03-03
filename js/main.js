@@ -730,7 +730,9 @@ function init() {
                 ultimaFecha: fechaHoy(),
                 ultimaAeronave: null
             };
+            data.ultimoAlumno = val;
             renderSelectores();
+            onHeaderChange();
             renderListaAlumnos();
             guardarDatos();
             document.getElementById("nuevoAlumno").value = "";
@@ -758,6 +760,7 @@ function init() {
         if (nombre && matricula) {
             data.aeronaves.push({ nombre, matricula });
             renderSelectores();
+            onHeaderChange();
             renderListaAeronaves();
             guardarDatos();
             document.getElementById("nuevaAeronaveNombre").value = "";
